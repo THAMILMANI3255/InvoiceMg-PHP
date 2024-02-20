@@ -27,7 +27,7 @@ include('functions.php');
 	</div>
 <div>
 
-<div id="delete_customer" class="modal fade">
+<div id="delete_emp" class="modal fade">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -35,7 +35,7 @@ include('functions.php');
         <h4 class="modal-title">Delete Employee</h4>
       </div>
       <div class="modal-body">
-        <p>Are you sure you want to delete this customer?</p>
+        <p>Are you sure you want to delete this employee ?</p>
       </div>
       <div class="modal-footer">
         <button type="button" data-dismiss="modal" class="btn btn-primary" id="delete">Delete</button>

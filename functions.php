@@ -378,7 +378,7 @@ function getCustomers() {
 	$mysqli->close();
 }
 
-// get Employee list
+// get Employee list 
 function getEmployee() {
 
 	// Connect to the database
@@ -422,7 +422,7 @@ function getEmployee() {
 
 	} else {
 
-		echo "<p>There are no customers to display.</p>";
+		echo "<p>There are no employee to display.</p>";
 
 	}
 

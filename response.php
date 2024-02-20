@@ -212,15 +212,14 @@ if ($action == 'create_customer'){
 // Adding new emp
 if($action == 'create_emp') {
 
-	$emp_name = $_POST['name'];
-	$emp_email = $_POST['email'];
-	$emp_address_1 = $_POST['address_1'];
-	$emp_address_2 = $_POST['address_2'];
-	$emp_town = $_POST['town'];
-	$emp_county = $_POST['county'];
-	$emp_postcode = $_POST['postcode'];
-	$emp_phone = $_POST['phone'];
-	
+	$emp_name = $_POST['emp_name'];
+	$emp_email = $_POST['emp_email'];
+	$emp_address_1 = $_POST['emp_address_1'];
+	$emp_address_2 = $_POST['emp_address_2'];
+	$emp_town = $_POST['emp_town'];
+	$emp_county = $_POST['emp_county'];
+	$emp_postcode = $_POST['emp_postcode'];
+	$emp_phone = $_POST['emp_phone'];
 
 	//our insert query query
 	$query  = "INSERT INTO emp
@@ -235,14 +234,14 @@ if($action == 'create_emp') {
 					phone
 				)
 				VALUES (
-					?,
-					?, 
-                	?,
-                	?,
-                	?,
-					?, 
-                	?,
-                	?
+					'".$emp_name."',
+				  	'".$emp_email."',
+				  	'".$emp_address_1."',
+				  	'".$emp_address_2."',
+				  	'".$emp_town."',
+				  	'".$emp_county."',
+				  	'".$emp_postcode."',
+				  	'".$emp_phone."'
                 );
               ";
 
@@ -255,7 +254,9 @@ if($action == 'create_emp') {
 	}
 
 	/* Bind parameters. TYpes: s = string, i = integer, d = double,  b = blob */
-	$stmt->bind_param('ssssssss',$emp_name,$emp_email,$emp_address_1,$emp_address_2,$emp_town,$emp_city,$emp_postcode,$emp_phone);
+	$stmt->bind_param(
+		'ssssssss',
+		$emp_name,$emp_email,$emp_address_1,$emp_address_2,$emp_town,$emp_city,$emp_postcode,$emp_phone);
 
 	if($stmt->execute()){
 	    //if saving success
@@ -541,7 +542,7 @@ if($action == 'delete_invoice') {
 
 }
 
-// Adding new product
+// update customer
 if($action == 'update_customer') {
 
 	// output any connection error
@@ -1119,7 +1120,7 @@ if($action == 'add_user') {
 	$mysqli->close();
 }
 
-// Update product
+// Update User
 if($action == 'update_user') {
 
 	// output any connection error
@@ -1242,7 +1243,117 @@ if($action == 'delete_user') {
 
 }
 
-// Delete User
+// Update emp
+if($action == 'update_emp') {
+
+	// output any connection error
+	if ($mysqli->connect_error) {
+	    die('Error : ('. $mysqli->connect_errno .') '. $mysqli->connect_error);
+	}
+
+	// Emp information
+	$getID = $_POST['id']; // id
+
+	$emp_name = $_POST['emp_name']; // emp_name
+	$emp_email = $_POST['emp_email']; // emp_email
+	$emp_address_1 = $_POST['emp_address_1']; // emp_address_1
+	$emp_address_2 = $_POST['emp_address_2']; // emp_address_2
+	$emp_town = $_POST['emp_town']; // emp_town  
+	$emp_county = $_POST['emp_county']; // emp_county
+	$emp_postcode = $_POST['emp_postcode']; // emp_postcode
+	$emp_phone = $_POST['emp_phone']; // emp_phone  
+
+		$query = "UPDATE emp SET  
+					name = '".$emp_name."' , 
+					email = '".$emp_email."' , 
+					address_1 = '".$emp_address_1."' ,
+					address_2 = '".$emp_address_2."' ,
+					town = '".$emp_town."' ,
+					county = '".$emp_county."' ,
+					postcode = '".$emp_postcode."' ,
+					phone = '".$emp_phone."' 
+				 WHERE id = '".$getID."'
+				";
+	
+	/* Prepare statement */
+	$stmt = $mysqli->prepare($query);
+	if($stmt === false) {
+	  trigger_error('Wrong SQL: ' . $query . ' Error: ' . $mysqli->error, E_USER_ERROR);
+	}
+
+	/* Bind parameters. TYpes: s = string, i = integer, d = double,  b = blob */
+	$stmt->bind_param(
+		'ssssssss',
+		$emp_name,$emp_email,$emp_address_1,$emp_address_2,$emp_town,$emp_county,$emp_postcode,$emp_phone
+	);
+	
+	//execute the query
+	if($stmt->execute()){
+	    //if saving success
+		echo json_encode(array(
+			'status' => 'Success',
+			'message'=> 'Emp has been updated successfully!'
+		));
+
+	} else {
+	    //if unable to create new record
+	    echo json_encode(array(
+	    	'status' => 'Error',
+	    	//'message'=> 'There has been an error, please try again.'
+	    	'message' => 'There has been an error, please try again.<pre>'.$mysqli->error.'</pre><pre>'.$query.'</pre>'
+	    ));
+	}
+
+	//close database connection
+	$mysqli->close();
+	
+}
+
+// Delete Emp
+if($action == 'delete_emp') {
+
+	// output any connection error
+	if ($mysqli->connect_error) {
+	    die('Error : ('. $mysqli->connect_errno .') '. $mysqli->connect_error);
+	}
+
+	$id = $_POST["delete"];
+
+	// the query
+	$query = "DELETE FROM emp WHERE id = '.$id.';";
+
+
+	/* Prepare statement */
+	$stmt = $mysqli->prepare($query);
+	if($stmt === false) {
+	  trigger_error('Wrong SQL: ' . $query . ' Error: ' . $mysqli->error, E_USER_ERROR);
+	}
+
+	/* Bind parameters. TYpes: s = string, i = integer, d = double,  b = blob */
+	$stmt->bind_param('s',$id);
+
+	if($stmt->execute()){
+	    //if saving success
+		echo json_encode(array(
+			'status' => 'Success',
+			'message'=> 'Emp has been deleted successfully!'
+		));
+
+	} else {
+	    //if unable to create new record
+	    echo json_encode(array(
+	    	'status' => 'Error',
+	    	//'message'=> 'There has been an error, please try again.'
+	    	'message' => 'There has been an error, please try again.<pre>'.$mysqli->error.'</pre><pre>'.$query.'</pre>'
+	    ));
+	}
+
+	// close connection 
+	$mysqli->close();
+
+}
+
+// Delete Customer
 if($action == 'delete_customer') {
 
 	// output any connection error

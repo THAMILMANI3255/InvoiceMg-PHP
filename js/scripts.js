@@ -45,6 +45,26 @@ $(document).ready(function() {
 	    actionAddEmp();
 	});
 
+	// update Emp
+	$(document).on('click', "#action_update_emp", function(e) {
+		e.preventDefault();
+		updateEmp();
+	});
+
+
+	// delete Emp
+	$(document).on('click', ".delete-emp", function(e) {
+        e.preventDefault();
+
+        var userId = 'action=delete_emp&delete='+ $(this).attr('data-emp-id'); //build a post data structure
+        var user = $(this);
+
+	    $('#delete_emp').modal({ backdrop: 'static', keyboard: false }).one('click', '#delete', function() {
+			deleteEmp(userId);
+			$(user).closest('tr').remove();
+        });
+   	});
+
 	// update User
 	$(document).on('click', "#action_update_user", function(e) {
 		e.preventDefault();
@@ -606,6 +626,30 @@ $(document).ready(function() {
 
    	}
 
+	function deleteEmp(userId) {
+
+       jQuery.ajax({
+
+		url: 'response.php',
+		type: 'POST', 
+        data: userId,
+        dataType: 'json', 
+            success: function(data){
+				$("#response .message").html("<strong>" + data.status + "</strong>: " + data.message);
+				$("#response").removeClass("alert-warning").addClass("alert-success").fadeIn();
+				$("html, body").animate({ scrollTop: $('#response').offset().top }, 1000);
+				$btn.button("reset");
+			},
+			error: function(data){
+				$("#response .message").html("<strong>" + data.status + "</strong>: " + data.message);
+				$("#response").removeClass("alert-success").addClass("alert-warning").fadeIn();
+				$("html, body").animate({ scrollTop: $('#response').offset().top }, 1000);
+				$btn.button("reset");
+			} 
+    	});
+
+   	}
+
 	function deleteCustomer(userId) {
 
         jQuery.ajax({
@@ -727,6 +771,32 @@ $(document).ready(function() {
     	});
 
    	}
+
+	   function updateEmp() {
+
+		var $btn = $("#action_update_emp").button("loading");
+
+	 jQuery.ajax({
+
+		 url: 'response.php',
+		 type: 'POST', 
+		 data: $("#update_emp").serialize(),
+		 dataType: 'json', 
+		 success: function(data){
+			 $("#response .message").html("<strong>" + data.status + "</strong>: " + data.message);
+			 $("#response").removeClass("alert-warning").addClass("alert-success").fadeIn();
+			 $("html, body").animate({ scrollTop: $('#response').offset().top }, 1000);
+			 $btn.button("reset");
+		 },
+		 error: function(data){
+			 $("#response .message").html("<strong>" + data.status + "</strong>: " + data.message);
+			 $("#response").removeClass("alert-success").addClass("alert-warning").fadeIn();
+			 $("html, body").animate({ scrollTop: $('#response').offset().top }, 1000);
+			 $btn.button("reset");
+		 } 
+	 });
+
+	}
 
    	function updateCustomer() {
 
