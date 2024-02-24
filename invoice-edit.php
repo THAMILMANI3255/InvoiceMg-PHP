@@ -275,7 +275,7 @@ $mysqli->close();
 						</td>
 						<td class="text-right">
 							<div class="input-group input-group-sm  no-margin-bottom">
-								<span class="input-group-addon"><?php echo CURRENCY ?></span>
+								<span class="input-group-addon"><?php echo '₹' ?></span>
 								<input type="text" class="form-control calculate invoice_product_price required" name="invoice_product_price[]" aria-describedby="sizing-addon1" placeholder="0.00" value="<?php echo $item_price; ?>">
 							</div>
 						</td>

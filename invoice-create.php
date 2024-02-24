@@ -179,7 +179,7 @@ include('functions.php');
 						</td>
 						<td class="text-right">
 							<div class="input-group input-group-sm  no-margin-bottom">
-								<span class="input-group-addon"><?php echo CURRENCY ?></span>
+								<span class="input-group-addon"><?php echo '₹' ?></span>
 								<input type="number" class="form-control calculate invoice_product_price required" name="invoice_product_price[]" aria-describedby="sizing-addon1" placeholder="0.00">
 							</div>
 						</td>
@@ -190,7 +190,7 @@ include('functions.php');
 						</td>
 						<td class="text-right">
 							<div class="input-group input-group-sm">
-								<span class="input-group-addon"><?php echo CURRENCY ?></span>
+								<span class="input-group-addon"><?php echo '₹' ?></span>
 								<input type="text" class="form-control calculate-sub" name="invoice_product_sub[]" id="invoice_product_sub" value="0.00" aria-describedby="sizing-addon1" disabled>
 							</div>
 						</td>
@@ -213,7 +213,7 @@ include('functions.php');
 							<strong>Sub Total:</strong>
 						</div>
 						<div class="col-xs-3">
-							<?php echo CURRENCY ?><span class="invoice-sub-total">0.00</span>
+							<?php echo '₹' ?><span class="invoice-sub-total">0.00</span>
 							<input type="hidden" name="invoice_subtotal" id="invoice_subtotal">
 						</div>
 					</div>
@@ -222,7 +222,7 @@ include('functions.php');
 							<strong>Discount:</strong>
 						</div>
 						<div class="col-xs-3">
-							<?php echo CURRENCY ?><span class="invoice-discount">0.00</span>
+							<?php echo '₹' ?><span class="invoice-discount">0.00</span>
 							<input type="hidden" name="invoice_discount" id="invoice_discount">
 						</div>
 					</div>
@@ -232,7 +232,7 @@ include('functions.php');
 						</div>
 						<div class="col-xs-3">
 							<div class="input-group input-group-sm">
-								<span class="input-group-addon"><?php echo CURRENCY ?></span>
+								<span class="input-group-addon"><?php echo '₹' ?></span>
 								<input type="text" class="form-control calculate shipping" name="invoice_shipping" aria-describedby="sizing-addon1" placeholder="0.00">
 							</div>
 						</div>
@@ -240,10 +240,10 @@ include('functions.php');
 					<?php if (ENABLE_VAT == true) { ?>
 					<div class="row">
 						<div class="col-xs-4 col-xs-offset-5">
-							<strong>TAX/VAT:</strong><br>Remove TAX/VAT <input type="checkbox" class="remove_vat">
+							<strong>GST:</strong><br>Remove GST <input type="checkbox" class="remove_vat">
 						</div>
 						<div class="col-xs-3">
-							<?php echo CURRENCY ?><span class="invoice-vat" data-enable-vat="<?php echo ENABLE_VAT ?>" data-vat-rate="<?php echo VAT_RATE ?>" data-vat-method="<?php echo VAT_INCLUDED ?>">0.00</span>
+							<?php echo '₹' ?><span class="invoice-vat" data-enable-vat="<?php echo ENABLE_VAT ?>" data-vat-rate="<?php echo VAT_RATE ?>" data-vat-method="<?php echo VAT_INCLUDED ?>">0.00</span>
 							<input type="hidden" name="invoice_vat" id="invoice_vat">
 						</div>
 					</div>
@@ -253,7 +253,7 @@ include('functions.php');
 							<strong>Total:</strong>
 						</div>
 						<div class="col-xs-3">
-							<?php echo CURRENCY ?><span class="invoice-total">0.00</span>
+							<?php echo '₹' ?><span class="invoice-total">0.00</span>
 							<input type="hidden" name="invoice_total" id="invoice_total">
 						</div>
 					</div>

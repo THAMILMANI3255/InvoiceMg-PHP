@@ -30,7 +30,7 @@ include('header.php');
 						</div>
 						<div class="col-xs-4">
 							<div class="input-group">
-								<span class="input-group-addon"><?php echo CURRENCY ?></span>
+								<span class="input-group-addon"><?php echo '₹' ?></span>
 								<input type="number" name="product_price" class="form-control required" placeholder="0.00" aria-describedby="sizing-addon1">
 							</div>
 						</div>

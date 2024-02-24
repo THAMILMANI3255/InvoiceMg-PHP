@@ -33,14 +33,14 @@ class invoicr extends FPDF_rotation
 	*                               Public methods                                 *
 	*                                                                              *
 	*******************************************************************************/
-	function invoicr($size='A4',$currency='€',$language='en')
+	function invoicr($size='A4',$'₹'='₹',$language='en')
 	{
 		$this->columns = 5;
 		$this->items = array();
 		$this->totals = array();
 		$this->addText = array();
 		$this->firstColumnWidth = 70;
-		$this->currency = $currency;
+		$this->'₹' = $'₹';
 		$this->maxImageDimensions = array(230,130);
 		
 		$this->setLanguage($language);
@@ -118,7 +118,7 @@ class invoicr extends FPDF_rotation
 		$p['description'] 	= $this->br2nl($description);
 		$p['vat']			= $vat;
 		if(is_numeric($vat)) {
-			$p['vat']		= $this->currency.' '.number_format($vat,2,$this->referenceformat[0],$this->referenceformat[1]);
+			$p['vat']		= $this->'₹'.' '.number_format($vat,2,$this->referenceformat[0],$this->referenceformat[1]);
 		} 
 		$p['quantity'] 		= $quantity;
 		$p['price']			= $price;
@@ -128,7 +128,7 @@ class invoicr extends FPDF_rotation
 			$this->firstColumnWidth = 58;
 			$p['discount'] = $discount;
 			if(is_numeric($discount)) {
-				$p['discount']	= $this->currency.' '.number_format($discount,2,$this->referenceformat[0],$this->referenceformat[1]);
+				$p['discount']	= $this->'₹'.' '.number_format($discount,2,$this->referenceformat[0],$this->referenceformat[1]);
 			}
 			$this->discountField = true;
 			$this->columns = 6;
@@ -142,7 +142,7 @@ class invoicr extends FPDF_rotation
 		$t['name']			= $name;
 		$t['value']			= $value;
 		if(is_numeric($value)) {
-			$t['value']			= $this->currency.' '.number_format($value,2,$this->referenceformat[0],$this->referenceformat[1]);
+			$t['value']			= $this->'₹'.' '.number_format($value,2,$this->referenceformat[0],$this->referenceformat[1]);
 		} 
 		$t['colored']		= $colored;
 		$this->totals[]		= $t;
@@ -382,7 +382,7 @@ class invoicr extends FPDF_rotation
 				$this->Cell($this->columnSpacing,$cHeight,'',0,0,'L',0);
 				$this->Cell($width_other,$cHeight,iconv('UTF-8', 'windows-1252', $item['vat']),0,0,'C',1);
 				$this->Cell($this->columnSpacing,$cHeight,'',0,0,'L',0);
-				$this->Cell($width_other,$cHeight,iconv('UTF-8', 'windows-1252', $this->currency.' '.number_format($item['price'],2,$this->referenceformat[0],$this->referenceformat[1])),0,0,'C',1);
+				$this->Cell($width_other,$cHeight,iconv('UTF-8', 'windows-1252', $this->'₹'.' '.number_format($item['price'],2,$this->referenceformat[0],$this->referenceformat[1])),0,0,'C',1);
 				if(isset($this->discountField)) 
 				{
 					$this->Cell($this->columnSpacing,$cHeight,'',0,0,'L',0);
@@ -396,7 +396,7 @@ class invoicr extends FPDF_rotation
 					}
 				}
 				$this->Cell($this->columnSpacing,$cHeight,'',0,0,'L',0);
-				$this->Cell($width_other,$cHeight,iconv('UTF-8', 'windows-1252', $this->currency.' '.number_format($item['total'],2,$this->referenceformat[0],$this->referenceformat[1])),0,0,'C',1);
+				$this->Cell($width_other,$cHeight,iconv('UTF-8', 'windows-1252', $this->'₹'.' '.number_format($item['total'],2,$this->referenceformat[0],$this->referenceformat[1])),0,0,'C',1);
 				$this->Ln();
 				$this->Ln($this->columnSpacing);
 			}
